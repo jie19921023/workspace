@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>Marketing</display-name>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+    
+  </welcome-file-list>
+  <!-- 添加乱码过滤器 -->
+  <filter>  
+        <filter-name>encodingFilter</filter-name>  
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>  
+        <init-param>  
+            <param-name>encoding</param-name>  
+            <param-value>UTF-8</param-value>  
+        </init-param>  
+        <init-param>  
+            <param-name>forceEncoding</param-name>  
+            <param-value>true</param-value>  
+        </init-param>  
+    </filter>  
+<!--  把post请求转成put或delete  -->   
+    <filter>
+      <filter-name>HiddenHttpMethodFilter</filter-name>
+      <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    </filter> 
+    
+    
+  <!-- 通过contextConfigLocation参数设置springmvc配置文件的加载路径，可以使用通配符 (此处其实也是默认路径)-->
+  <context-param>
+    <param-name>contextConfigLocation</param-name> 
+    <param-value>/WEB-INF/springMVC-servlet.xml</param-value> 
+  </context-param>
+  <servlet>  
+        <servlet-name>springMVC</servlet-name>  
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>  
+        <load-on-startup>1</load-on-startup>  
+    </servlet>  
+    <!--配置连接池  -->
+	<servlet>
+		<servlet-name>ServletConfigurator</servlet-name>
+		<servlet-class>
+			org.logicalcobwebs.proxool.configuration.ServletConfigurator</servlet-class>
+		<init-param>
+			<param-name>xmlFile</param-name>
+			<param-value>/WEB-INF/proxool.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+    <!--  连接线程池监控-->
+  <servlet>
+       <servlet-name>admin</servlet-name>
+       <servlet-class>org.logicalcobwebs.proxool.admin.servlet.AdminServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+       <servlet-name>admin</servlet-name>
+       <url-pattern>/admin</url-pattern>
+  </servlet-mapping>
+    
+    
+    <filter-mapping>  
+        <filter-name>encodingFilter</filter-name>  
+        <url-pattern>/*</url-pattern>  
+    </filter-mapping>  
+     <filter-mapping>
+        <filter-name>HiddenHttpMethodFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping> 
+    <servlet-mapping>  
+        <servlet-name>springMVC</servlet-name>  
+        <url-pattern>/</url-pattern>  
+    </servlet-mapping>  
+  
+</web-app>

@@ -1,0 +1,6 @@
+使用说明：
+
+com.market.utils包为工具类
+所有的dao层方法继承jdbcUtils类
+面向接口编程，使用注解
+每个人自己的页面在view文件夹下建立（建立自己的文件夹（名字为功能的英文，与control类的requestmapping对应），在自己的文件夹里写页面，访问规则为文件夹名+requestMapping映射地址）

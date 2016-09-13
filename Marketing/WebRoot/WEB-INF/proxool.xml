@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<something-else-entirely>
+
+	<proxool>
+
+		<alias>marketDevelop</alias>
+        <driver-url>jdbc:mysql://localhost:3306/market</driver-url>
+		<driver-class>com.mysql.jdbc.Driver</driver-class>
+
+		<driver-properties>
+
+			<property name="user" value="root" />
+
+			<property name="password" value="root" />
+
+			<property name="useUnicode" value="true" />
+
+			<property name="characterEncoding" value="utf-8" />
+			
+			<property name="useOldAliasMetadataBehavior" value="true" />
+			
+
+		</driver-properties>
+
+      <!-- proxool自动侦察各个连接状态的时间间隔(毫秒),侦察到空闲的连接就马上回收,超时的销毁 默认30秒   -->  
+		<house-keeping-sleep-time>90000</house-keeping-sleep-time>
+
+        <!-- 最少保持连接数  -->
+		<prototype-count>10</prototype-count>
+        <maximum-connection-count>1000</maximum-connection-count>
+        <minimum-connection-count>10</minimum-connection-count>
+
+       <!-- 没有空闲连接可以分配而在队列中等候的最大请求数,超过这个请求数的用户连接就不会被接受   -->    
+		<proxool.simultaneous-build-throttle>200</proxool.simultaneous-build-throttle>
+
+
+		<house-keeping-test-sql>select CURRENT_DATE</house-keeping-test-sql>
+
+	</proxool>
+
+</something-else-entirely>
